@@ -14,7 +14,7 @@ bool read_positive(int *value){
             return false;
         } else {
             *value = number;
-            return true; // Return the entered number
+            return true;
         }
     } while (number <= 0);
 }
