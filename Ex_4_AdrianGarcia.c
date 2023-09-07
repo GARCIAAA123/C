@@ -5,15 +5,13 @@
 
 int read_integer(void) {
     int number;
-    do {
-        printf("Enter positive numbers or negative to stop: ");
-        if (scanf("%d", &number) != 1) {
-            while (getchar() != '\n');
-            printf("Invalid input\n");
-        } else {
-            return number; // Return the entered number
+    printf("Enter positive numbers or negative to stop: ");
+    if (scanf("%d", &number) != 1) {
+        while (getchar() != '\n');
+        printf("Invalid input\n");
+    } else {
+        return number; // Return the entered number
         }
-    } while (number <= 0);
     return 0;
 }
 
