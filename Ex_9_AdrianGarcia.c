@@ -6,13 +6,13 @@
 #include "stdlib.h"
 
 int find_first(const unsigned int *array, unsigned int what) {
-    for (int i = 0; 1; i++) {
+    for (int i = 0; what != 0; i++) {
         if (array[i] == what) {
-            printf("Found");
+            printf("Found index [%i]", i);
             return i;
         }
-        return -1;
     }
+    return -1;
 }
 
 
@@ -21,7 +21,7 @@ void print_numbers(const int *array, int count) {
     for (int i = 0; i <= count; ++i) {
         printf("%d\n", array[i]);
     }
-    printf("Enter a number");
+    printf("Enter a number or 0 to STOP:\n");
     scanf("%d", &what);
     find_first(array, what);
 }
