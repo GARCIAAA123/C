@@ -16,15 +16,15 @@ int read_integer(void) {
 }
 
 int main() {
-    int count = 0;
+    float count = 0;
     float sum = 0;
     int number;
     do {
         number = read_integer();
         if (number < 0) {
-            printf("You entered %d positive numbers. The average is: %.3f\n", count, sum / count);
+            printf("You entered %d positive numbers. The average is: %.3f\n", (int) count, sum / count);
         } else {
-            sum = sum + number;
+            sum = sum + (float) number;
             count++;
         }
     } while (number >= 0);

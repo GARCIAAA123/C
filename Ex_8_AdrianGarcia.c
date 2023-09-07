@@ -16,7 +16,7 @@ int main(){
     int count = 15;
     srand(time(NULL));
     for (int i =0; i < count; ++i) {
-        array[i] = rand()%100;
+        array[i] = rand() % 100;
     }
     print_numbers(array, count);
 }
