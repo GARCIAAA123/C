@@ -18,16 +18,14 @@ int read_range(int low, int high) {
 }
 
 int main() {
-    int count = 0;
     printf("Let's play!");
-    while (count < 3) {
+    for (int i = 0; i < 3; ++i) {
         int rolls = read_range(1, 6);
         if (rolls == 6) {
             printf("I got 6. It is a tie!\n");
         } else {
             printf("I got %d. I win!\n", rolls + 1);
         }
-        count++;
     }
     printf("Better luck next time. Bye!");
 }
