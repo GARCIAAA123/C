@@ -6,7 +6,6 @@
 
 bool read_positive(int *value){
     int number;
-    do {
         printf("Enter positive numbers or negative to stop: ");
         if (scanf("%d", &number) != 1 || number < 0) {
             while (getchar() != '\n');
@@ -16,7 +15,6 @@ bool read_positive(int *value){
             *value = number;
             return true;
         }
-    } while (number <= 0);
 }
 
 int main(){
