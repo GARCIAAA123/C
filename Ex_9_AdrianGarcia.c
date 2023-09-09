@@ -6,9 +6,8 @@
 #include "stdlib.h"
 
 int find_first(const unsigned int *array, unsigned int what) {
-    for (int i = 0; what != 0; i++) {
+    for (int i = 0; array[i] != 0; i++) {
         if (array[i] == what) {
-            printf("Found index [%i]", i);
             return i;
         }
     }
@@ -23,11 +22,21 @@ void print_numbers(const int *array, int count) {
     }
     printf("Enter a number or 0 to STOP:\n");
     scanf("%d", &what);
-    find_first(array, what);
+    if (what == 0) {
+        printf("Bye!");
+        return;
+    }
+    int result = find_first(array, what);
+    if (result != -1) {
+        printf("Found at the index [%i]", result);
+    } else {
+        printf("Not found");
+    }
+
 }
 
 int main() {
-    int array[20];
+    unsigned int array[20];
     int count = 19;
     array[19] = 0;
     srand(time(NULL));
@@ -36,7 +45,3 @@ int main() {
     }
     print_numbers(array, count);
 }
-
-
-
-
