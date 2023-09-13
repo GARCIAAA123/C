@@ -4,10 +4,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+
 #define STR_SIZE 80
 
 
-int main(){
+int main() {
     char text[STR_SIZE];
     do {
         printf("Enter a string(Type stop to stop): ");
