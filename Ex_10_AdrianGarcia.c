@@ -11,7 +11,7 @@ int main() {
     char text[STR_SIZE];
     do {
         printf("Enter a string(Type stop to stop): ");
-        fgets(text, 80, stdin);
+        fgets(text, STR_SIZE, stdin);
         if (text[strlen(text) - 1] == '\n') {
             text[strlen(text) - 1] = '\0';
         }
