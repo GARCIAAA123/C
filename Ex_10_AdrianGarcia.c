@@ -2,7 +2,6 @@
 // Created by Adrian Garcia on 13/9/23.
 //
 #include "stdio.h"
-#include "stdlib.h"
 #include "string.h"
 
 #define STR_SIZE 80
