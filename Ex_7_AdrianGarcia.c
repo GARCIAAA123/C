@@ -5,7 +5,7 @@
 #include "stdio.h"
 
 bool read_positive(int *value){
-    int number;
+    int number = 0;
         printf("Enter positive numbers or negative to stop: ");
         if (scanf("%d", &number) != 1 || number < 0) {
             while (getchar() != '\n');

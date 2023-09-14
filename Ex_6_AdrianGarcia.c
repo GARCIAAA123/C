@@ -24,7 +24,7 @@ int option(void) {
 }
 
 int d_6(int low, int high) {
-    int x;
+    int x = 0;
     srand(time(NULL));
     x = (rand() % (high - low + 1)) + low;
     printf("The number is %d\n", x); // Prints the random number
@@ -32,7 +32,7 @@ int d_6(int low, int high) {
 }
 
 int d_10(int low, int high) {
-    int x;
+    int x = 0;
     srand(time(NULL));
     x = (rand() % (high - low + 1)) + low;
     printf("The number is %d\n", x); // Prints the random number
