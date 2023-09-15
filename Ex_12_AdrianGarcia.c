@@ -19,7 +19,7 @@ int count_words(const char *str, const char *word) {
 }
 
 int new_line(char *name) {
-    fgets(name, STR_SIZE, stdin);
+    fgets(name, sizeof(name), stdin);
     if (name[strlen(name) - 1] == '\n') {
         name[strlen(name) - 1] = '\0';
     }
