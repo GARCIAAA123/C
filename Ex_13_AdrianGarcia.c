@@ -68,7 +68,7 @@ int main() {
         exit(1);
     } else {
         printf("File opened successfully.\n");
-        if ((!feof(file))){
+        if ((!feof(file))) {
             while (fscanf(file, "%d", &num) == 1) {
                 printf("%d\n", num);
                 count++;
@@ -82,14 +82,15 @@ int main() {
         }
 
         fclose(file);
-
-        if (count > 0) {
+        if (count == 0){
+            printf("File is empty");
+        } else{
             printf("Count of numbers: %d\n", count);
             printf("Lowest number: %d\n", lowest);
             printf("Highest number: %d\n", highest);
-        } else {
-            printf("No integers found in the file.\n");
         }
+
+
     }
     return 0;
 }
