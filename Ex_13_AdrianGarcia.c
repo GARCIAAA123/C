@@ -11,6 +11,14 @@
 
 int file_handling(int *count, int *lowest, int *highest);
 
+int new_line(char *name) {
+    fgets(name, STR_SIZE, stdin);
+    if (name[strlen(name) - 1] == '\n') {
+        name[strlen(name) - 1] = '\0';
+    }
+    return 0;
+}
+
 int main() {
     int count = 0;
     int lowest = INT_MAX;
@@ -43,7 +51,7 @@ int file_handling(int *count, int *lowest, int *highest) {
         return 1;
     } else {
         printf("File opened successfully.\n");
-
+        new_line((char *) file);
         while (fscanf(file, "%d", &num) == 1) {
             printf("%d\n", num);
             (*count)++;
@@ -59,3 +67,4 @@ int file_handling(int *count, int *lowest, int *highest) {
         return 0;
     }
 }
+
