@@ -48,6 +48,6 @@ void UppercaseFile(const char *filename, char lines[MAX_WIDTH][MAX_LENGTH]) {
             fputc(toupper(lines[i][j]), file);
         }
     }
-    printf("Lines: %d",lineCount);
+    printf("Lines: %d", lineCount);
     fclose(file);
 }
