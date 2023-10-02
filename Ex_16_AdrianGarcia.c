@@ -28,9 +28,9 @@ int main() {
     int number;
     char input[100];
 
-    printf("Enter a number or type 'stop' to stop the program:\n");
+    printf("Enter a number or type 'end' to stop the program:\n");
 
-    while (strcmp(input, "stop\n") != 0) {
+    while (strcmp(input, "end\n") != 0) {
         if (fgets(input, sizeof(input), stdin) == NULL) {
             perror("Input error");
             exit(EXIT_FAILURE);
