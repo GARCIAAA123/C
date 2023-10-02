@@ -59,9 +59,11 @@ int main() {
             printf("Password is too long.\n");
         }
 
-
         printf("Enter another word or stop to quit: ");
         scanf("%s", word);
+    }
+    if (strcmp(word, "stop") == 0){
+        printf("Program stopped!");
     }
 
     return 0;
