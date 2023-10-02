@@ -2,11 +2,11 @@
 // Created by Adrian Garcia on 29/9/23.
 //
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
-#include <string.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "time.h"
+#include "stdbool.h"
+#include "string.h"
 
 #define MAX_SIZE 32
 
