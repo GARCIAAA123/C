@@ -20,7 +20,8 @@ int main() {
             random_number = rand();
             int shifted_number = random_number >> number;
             shifted_number = shifted_number & 0x3F;
-            printf("Hexa: 0x%02X\n", shifted_number);
+            printf("Number no shifted: 0x%X\n",random_number);
+            printf("Number shifted: 0x%02X\n", shifted_number);
 
         }
 
