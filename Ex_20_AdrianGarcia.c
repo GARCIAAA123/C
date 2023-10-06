@@ -6,10 +6,6 @@
 #include <time.h>
 #include "debug.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "debug.h"
 
 int main() {
     srand(time(NULL));
