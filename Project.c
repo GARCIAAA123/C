@@ -3,6 +3,7 @@
 
 #define NAME 100
 #define MAX_SUBJECTS 100
+#define LINE_MAX 256
 
 int isNameValid(const char *name) {
     int hasAlpha = 0;
@@ -45,7 +46,7 @@ char getGrade(int score) {
 float calculateAverage(char grades[], int count) {
     float totalGrade = 0;
     for (int i = 0; i < count; i++) {
-        totalGrade += grades[i] - '0'; // Convert char to int by subtracting '0'
+        totalGrade += grades[i] - '0';
     }
     return totalGrade / count;
 }
@@ -129,7 +130,7 @@ int main() {
 
     file = fopen("report.txt", "r");
     if (file) {
-        char line[256];
+        char line[LINE_MAX];
         while (fgets(line, sizeof(line), file)) {
             printf("%s", line);
         }
