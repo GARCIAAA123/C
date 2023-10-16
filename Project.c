@@ -1,11 +1,8 @@
-//
-// Created by Adrian Garcia on 2/10/23.
-//
 #include <stdio.h>
 #include <string.h>
 
-
 #define NAME 100
+#define MAX_SUBJECTS 100
 
 int isNameValid(const char *name) {
     int hasAlpha = 0;
@@ -45,10 +42,20 @@ char getGrade(int score) {
     }
 }
 
+float calculateAverage(char grades[], int count) {
+    float totalGrade = 0;
+    for (int i = 0; i < count; i++) {
+        totalGrade += grades[i] - '0'; // Convert char to int by subtracting '0'
+    }
+    return totalGrade / count;
+}
+
 int main() {
     char name[NAME];
     int subjects;
     int count = 0;
+    int scores[MAX_SUBJECTS];
+    char grades[MAX_SUBJECTS];
 
     printf("Welcome to the Student Grade Calculator!\n");
 
@@ -61,11 +68,10 @@ int main() {
         }
     } while (!isNameValid(name));
 
-    char input[NAME];
-
     int tempSubjects;
     do {
         printf("How many subjects do you want to calculate grades for? ");
+        char input[NAME];
         fgets(input, sizeof(input), stdin);
         input[strcspn(input, "\n")] = '\0';
         if (!isNumber(input) || sscanf(input, "%d", &tempSubjects) != 1 || tempSubjects <= 0) {
@@ -82,7 +88,6 @@ int main() {
         fprintf(file, "------------------------------------------\n");
         fprintf(file, "Subject                  Score       Grade\n");
 
-
         while (count < subjects) {
             char course[NAME];
             int score;
@@ -91,10 +96,14 @@ int main() {
                 printf("Enter subject %d name: ", count + 1);
                 fgets(course, sizeof(course), stdin);
                 course[strcspn(course, "\n")] = '\0';
+                if(!isNameValid(course)){
+                    printf("Invalid input.Name must contain only letters and cannot be empty.\n");
+                }
             } while (!isNameValid(course));
 
             do {
                 printf("Enter your score for %s (0-100): ", course);
+                char input[NAME];
                 fgets(input, sizeof(input), stdin);
                 input[strcspn(input, "\n")] = '\0';
                 if (!isNumber(input) || sscanf(input, "%d", &score) != 1 || score < 0 || score > 100) {
@@ -102,10 +111,16 @@ int main() {
                 }
             } while (score < 0 || score > 100);
 
-            fprintf(file, "%-25s %d%% %10c\n", course, score, getGrade(score));
-
+            scores[count] = score;
+            grades[count] = getGrade(score);
+            fprintf(file, "%-25s %d%% %10c\n", course, score, grades[count]);
             count++;
         }
+
+        float average = calculateAverage(grades, subjects);
+        fprintf(file, "\n");
+        fprintf(file, "Average Grade: %.2f\n", average);
+        fprintf(file, "------------------------------------------\n");
 
         fclose(file);
     } else {
