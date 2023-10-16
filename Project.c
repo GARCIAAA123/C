@@ -51,15 +51,7 @@ float calculateAverage(char grades[], int count) {
     return totalGrade / count;
 }
 
-int main() {
-    char name[NAME];
-    int subjects;
-    int count = 0;
-    int scores[MAX_SUBJECTS];
-    char grades[MAX_SUBJECTS];
-
-    printf("Welcome to the Student Grade Calculator!\n");
-
+void inputStudentInfo(char name[NAME]) {
     do {
         printf("Please enter your name (letters only): ");
         fgets(name, sizeof(name), stdin);
@@ -68,19 +60,56 @@ int main() {
             printf("Invalid input. Name must contain only letters and cannot be empty.\n");
         }
     } while (!isNameValid(name));
+}
 
-    int tempSubjects;
+int inputSubjectCount() {
+    char input[NAME];
+    int subjects;
     do {
         printf("How many subjects do you want to calculate grades for? ");
-        char input[NAME];
         fgets(input, sizeof(input), stdin);
         input[strcspn(input, "\n")] = '\0';
-        if (!isNumber(input) || sscanf(input, "%d", &tempSubjects) != 1 || tempSubjects <= 0) {
+        if (!isNumber(input) || sscanf(input, "%d", &subjects) != 1 || subjects <= 0) {
             printf("Invalid input. Please enter a valid positive number.\n");
-        } else {
-            subjects = tempSubjects;
         }
-    } while (subjects <= 0);
+    } while (!isNumber(input) || sscanf(input, "%d", &subjects) != 1 || subjects <= 0);
+    return subjects;
+}
+
+void inputSubjectScores(int subjects, char courseNames[][NAME], int scores[MAX_SUBJECTS]) {
+    for (int i = 0; i < subjects; i++) {
+        do {
+            printf("Enter subject %d name: ", i + 1);
+            fgets(courseNames[i], sizeof(courseNames[i]), stdin);
+            courseNames[i][strcspn(courseNames[i], "\n")] = '\0';
+            if (!isNameValid(courseNames[i])) {
+                printf("Invalid input. Name must contain only letters and cannot be empty.\n");
+            }
+        } while (!isNameValid(courseNames[i]));
+
+        do {
+            printf("Enter your score for %s (0-100): ", courseNames[i]);
+            char input[NAME];
+            fgets(input, sizeof(input), stdin);
+            input[strcspn(input, "\n")] = '\0';
+            if (!isNumber(input) || sscanf(input, "%d", &scores[i]) != 1 || scores[i] < 0 || scores[i] > 100) {
+                printf("Invalid input. Score must be between 0 and 100.\n");
+            }
+        } while (scores[i] < 0 || scores[i] > 100);
+    }
+}
+
+int main() {
+    char name[NAME];
+    int subjects;
+    int scores[MAX_SUBJECTS];
+    char grades[MAX_SUBJECTS];
+    char courseNames[MAX_SUBJECTS][NAME];
+
+    printf("Welcome to the Student Grade Calculator!\n");
+
+    inputStudentInfo(name);
+    subjects = inputSubjectCount();
 
     FILE *file = fopen("report.txt", "w");
     if (file) {
@@ -89,33 +118,11 @@ int main() {
         fprintf(file, "------------------------------------------\n");
         fprintf(file, "Subject                  Score       Grade\n");
 
-        while (count < subjects) {
-            char course[NAME];
-            int score;
+        inputSubjectScores(subjects, courseNames, scores);
 
-            do {
-                printf("Enter subject %d name: ", count + 1);
-                fgets(course, sizeof(course), stdin);
-                course[strcspn(course, "\n")] = '\0';
-                if(!isNameValid(course)){
-                    printf("Invalid input.Name must contain only letters and cannot be empty.\n");
-                }
-            } while (!isNameValid(course));
-
-            do {
-                printf("Enter your score for %s (0-100): ", course);
-                char input[NAME];
-                fgets(input, sizeof(input), stdin);
-                input[strcspn(input, "\n")] = '\0';
-                if (!isNumber(input) || sscanf(input, "%d", &score) != 1 || score < 0 || score > 100) {
-                    printf("Invalid input. Score must be between 0 and 100.\n");
-                }
-            } while (score < 0 || score > 100);
-
-            scores[count] = score;
-            grades[count] = getGrade(score);
-            fprintf(file, "%-25s %d%% %10c\n", course, score, grades[count]);
-            count++;
+        for (int i = 0; i < subjects; i++) {
+            grades[i] = getGrade(scores[i]);
+            fprintf(file, "%-25s %d%% %10c\n", courseNames[i], scores[i], grades[i]);
         }
 
         float average = calculateAverage(grades, subjects);
