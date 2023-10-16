@@ -122,7 +122,7 @@ int main() {
 
         for (int i = 0; i < subjects; i++) {
             grades[i] = getGrade(scores[i]);
-            fprintf(file, "%-25s %d%% %10c\n", courseNames[i], scores[i], grades[i]);
+            fprintf(file, "%-25s %3d%% %11c\n", courseNames[i], scores[i], grades[i]);
         }
 
         float average = calculateAverage(grades, subjects);
